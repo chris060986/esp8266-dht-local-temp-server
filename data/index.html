@@ -157,13 +157,13 @@
 	<div class="box">
 		<div class="value">Temperatur</div>
 		<div class="gauge-wrap" id="temp" settings.valueType="celsius" data-value="%TEMPERATURE%"></div>
-		<div class="value"><span id="tempTxt">%TEMPERATURE%°C</span></div>
+		<div class="value"><span id="tempTxt">%TEMPERATURE%</span>°C</div>
 	</div>
 
 	<div class="box">
 		<div class="value">Luftfeuchtigkeit</div>
 		<div class="gauge-wrap" id="humidity" settings.valueType="percent" data-value="%HUMIDITY%"></div>
-		<div class="value"><span id="humidityTxt">%HUMIDITY%%</span></div>
+		<div class="value"><span id="humidityTxt">%HUMIDITY%</span><span>&#37;</span></div>
 	</div>
 
   </div>
@@ -181,8 +181,7 @@ $.fn.simpleGauge = function(options) {
 		saturation: '100%', // Saturation for active color
 		lightness: '50%', // Lightness for active color
 		gaugeBG: '#1b1b1f', // Background color of Gauge
-		parentBG: '#323138', // This color should match the parent div of the gauge (or beyond)
-		//valueType: 'celsius' //The expected value type. Available is 'celsius' and percent.
+		parentBG: '#323138' // This color should match the parent div of the gauge (or beyond)
 	};
 
 	var settings = $.extend({}, defaults, options);

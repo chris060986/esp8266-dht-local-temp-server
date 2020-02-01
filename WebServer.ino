@@ -24,21 +24,22 @@ unsigned long previousMillis = 0;
 const long interval = 2000;
 
 String getTemperature(){
-  float temp = dht.readTemperature();
-  if(isnan(temp)){
-    return "error reading temp";
-  }
-  Serial.println("Temperature read: " + String(temp) + "°C");
-  return String(temp);
+  return String(temperature);
 }
 
 String getHumidity(){
-  float humidity = dht.readHumidity();
-  if(isnan(humidity)){
-    return "error reading humidity";
-  }
-  Serial.println("Humidity read: " + String(humidity) + "%");
   return String(humidity);
+}
+
+String getJson(){
+  StaticJsonDocument<500> doc;
+  doc["hostname"] = HOSTNAME;
+  doc["temperature"] = temperature;
+  doc["humidity"] = humidity;
+        
+  String jsonString;
+  serializeJson(doc, jsonString);
+  return jsonString;
 }
 
 String processor(const String& var){
@@ -84,18 +85,30 @@ void setup() {
     
     Serial.println();
     Serial.println("WiFi connected");
-    Serial.println("IP address: "); Serial.println(WiFi.localIP());        
+    Serial.print("IP address: "); Serial.println(WiFi.localIP());   
+
+    do{
+      temperature = dht.readTemperature();
+      Serial.println("temp: " + String(temperature));
+      delay(2000);
+    }while(isnan(temperature));
      
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
       request->send(SPIFFS, "/index.html", String(), false, processor);
     });
 
     server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
+      Serial.println(getTemperature());
       request->send_P(200, "text/plain", getTemperature().c_str());
     });
   
     server.on("/humidity", HTTP_GET, [](AsyncWebServerRequest *request){
+      Serial.println(getHumidity());
       request->send_P(200, "text/plain", getHumidity().c_str());
+    });
+
+    server.on("/json", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send_P(200, "text/json", getJson().c_str());
     });
 
     server.begin();
@@ -103,4 +116,32 @@ void setup() {
 }
 
 void loop() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    // save the last time you updated the DHT values
+    previousMillis = currentMillis;
+    // Read temperature as Celsius (the default)
+    float newT = dht.readTemperature();
+    // Read temperature as Fahrenheit (isFahrenheit = true)
+    //float newT = dht.readTemperature(true);
+    // if temperature read failed, don't change t value
+    if (isnan(newT)) {
+      Serial.println("Failed to read from DHT sensor!");
+    }
+    else {
+      temperature = newT;
+      Serial.println(temperature);
+    }
+    // Read Humidity
+    float newH = dht.readHumidity();
+    // if humidity read failed, don't change h value 
+    if (isnan(newH)) {
+      Serial.println("Failed to read from DHT sensor!");
+    }
+    else {
+      humidity = newH;
+      Serial.println(humidity);
+    }
+  }
+  delay(200);
 }
