@@ -31,6 +31,10 @@ String getHumidity(){
   return String(humidity);
 }
 
+String getHostname(){
+  return HOSTNAME;
+}
+
 String getJson(){
   StaticJsonDocument<500> doc;
   doc["hostname"] = HOSTNAME;
@@ -50,9 +54,13 @@ String processor(const String& var){
   else if (var == "HUMIDITY"){
     return getHumidity();
   }
+  else if (var == "HOSTNAME"){
+    return getHostname();
+  }
   else {
     Serial.println("Error: Case not defined");
-  }  
+    return var;
+  }
 }
 
 void setup() {
