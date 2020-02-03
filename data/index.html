@@ -177,8 +177,8 @@ $.fn.simpleGauge = function(options) {
 		width: '200',
 		hueLow: '128', // Choose the starting hue for the active color (for value 0)
 		hueHigh: '1', // Choose the ending hue for the active color (for value 100)
-		saturation: '100%', // Saturation for active color
-		lightness: '50%', // Lightness for active color
+		saturation: '100', // Saturation for active color
+		lightness: '50', // Lightness for active color
 		gaugeBG: '#1b1b1f', // Background color of Gauge
 		parentBG: '#323138' // This color should match the parent div of the gauge (or beyond)
 	};
@@ -223,7 +223,7 @@ $.fn.simpleGauge = function(options) {
 		// Set Colors
 
 		if ( value ) {
-			$(this).find('.gauge-active, .gauge-wrap-before').css('background-color', 'hsla(' + Math.round(activeColor) + ', ' + settings.saturation + ', ' + settings.lightness + ', 1)');
+			$(this).find('.gauge-active, .gauge-wrap-before').css('background-color', 'hsla(' + Math.round(activeColor) + ', ' + settings.saturation + String.fromCharCode(parseInt(0031,16)) + ', ' + settings.lightness + String.fromCharCode(parseInt(0031,16)) + ', 1)');
 		} else {
 			$(this).find('.gauge-active, .gauge-wrap-before').hide();
 		}

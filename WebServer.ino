@@ -59,7 +59,7 @@ String processor(const String& var){
   }
   else {
     Serial.println("Error: Case not defined");
-    return var;
+    return "Error here";
   }
 }
 
