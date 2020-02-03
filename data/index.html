@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>jQuery Simple Gauge Plugin Examples</title>
+  <title>Mirjs Temperatur Sensor</title>
   <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
@@ -153,17 +153,17 @@
 
 <body>
   <div id="main">
-	<di< class="headline"><h2>Wohnzimmer</h2></di>
+	<div class="headline"><h2>%HOSTNAME%</h2></div>
 	<div class="box">
 		<div class="value">Temperatur</div>
 		<div class="gauge-wrap" id="temp" settings.valueType="celsius" data-value="%TEMPERATURE%"></div>
-		<div class="value"><span id="tempTxt">%TEMPERATURE%°C</span></div>
+		<div class="value"><span id="tempTxt">%TEMPERATURE%</span>°C</div>
 	</div>
 
 	<div class="box">
 		<div class="value">Luftfeuchtigkeit</div>
 		<div class="gauge-wrap" id="humidity" settings.valueType="percent" data-value="%HUMIDITY%"></div>
-		<div class="value"><span id="humidityTxt">%HUMIDITY%%</span></div>
+		<div class="value"><span id="humidityTxt">%HUMIDITY%</span><span>&#37;</span></div>
 	</div>
 
   </div>
@@ -173,16 +173,14 @@
 $.fn.simpleGauge = function(options) {
 
 	// Defaults
-
 	var defaults = {
 		width: '200',
 		hueLow: '128', // Choose the starting hue for the active color (for value 0)
 		hueHigh: '1', // Choose the ending hue for the active color (for value 100)
-		saturation: '100%', // Saturation for active color
-		lightness: '50%', // Lightness for active color
+		saturation: '100', // Saturation for active color
+		lightness: '50', // Lightness for active color
 		gaugeBG: '#1b1b1f', // Background color of Gauge
-		parentBG: '#323138', // This color should match the parent div of the gauge (or beyond)
-		//valueType: 'celsius' //The expected value type. Available is 'celsius' and percent.
+		parentBG: '#323138' // This color should match the parent div of the gauge (or beyond)
 	};
 
 	var settings = $.extend({}, defaults, options);
@@ -225,7 +223,7 @@ $.fn.simpleGauge = function(options) {
 		// Set Colors
 
 		if ( value ) {
-			$(this).find('.gauge-active, .gauge-wrap-before').css('background-color', 'hsla(' + Math.round(activeColor) + ', ' + settings.saturation + ', ' + settings.lightness + ', 1)');
+			$(this).find('.gauge-active, .gauge-wrap-before').css('background-color', 'hsla(' + Math.round(activeColor) + ', ' + settings.saturation + String.fromCharCode(parseInt(0031,16)) + ', ' + settings.lightness + String.fromCharCode(parseInt(0031,16)) + ', 1)');
 		} else {
 			$(this).find('.gauge-active, .gauge-wrap-before').hide();
 		}
