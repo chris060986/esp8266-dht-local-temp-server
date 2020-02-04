@@ -1,6 +1,5 @@
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
-//#include <ESP8266WebServer.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <DHT.h>
@@ -19,7 +18,6 @@ AsyncWebServer server(80);
 
 float temperature, humidity;
 int soil = analogRead(A0);
-float soil_percent;
 unsigned long previousMillis = 0;
 const long interval = 2000;
 
