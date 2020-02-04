@@ -10,7 +10,7 @@
 
 #define WLAN_SSID     "WLAN_SSID"
 #define WLAN_PASSWORD "WIFI_SECURE_KEY"
-#define HOSTNAME      "thermometerweb"
+#define HOSTNAME      "HOSTNAME"
 
 DHT dht(DHTPIN, DHTTYPE, 22);
 
@@ -128,9 +128,6 @@ void loop() {
     previousMillis = currentMillis;
     // Read temperature as Celsius (the default)
     float newT = dht.readTemperature();
-    // Read temperature as Fahrenheit (isFahrenheit = true)
-    //float newT = dht.readTemperature(true);
-    // if temperature read failed, don't change t value
     if (isnan(newT)) {
       Serial.println("Failed to read from DHT sensor!");
     }

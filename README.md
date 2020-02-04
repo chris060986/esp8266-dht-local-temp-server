@@ -1,16 +1,16 @@
 # NodeMCU Temperature Sensor with DHT22
 
 ![Screenshot](img/smartphone_screenshot_small.jpg)  
-Creates a simple asynchronous webserver on a NodeMCU to show up temperature an humidity. As sensor DHT22 is used.
+Creates a simple asynchronous webserver on a NodeMCU to show up temperature an humidity. As sensor DHT22 is used. Before installing code on NodeMCU make sure to upload files from data folder and replace placeholder for **HOSTNAME**, **WLAN_SSID** and **WIFI_SECURE_KEY**
 
 ### Api
-`/` Returns the file *./WebServer/data/index.html*, replacing placeholder for temperature and humidity.
+`http://<hostname>/` Returns the file *./WebServer/data/index.html*, replacing placeholder for temperature and humidity.
 
-`/temp` Returns the temperature in °C as a string, e.g. `20.1`.
+`http://<hostname>/temp` Returns the temperature in °C as a string, e.g. `20.1`.
 
-`/humidity` Returns the humidity in percent as a string, e.g. `50.3`.
+`http://<hostname>/humidity` Returns the humidity in percent as a string, e.g. `50.3`.
 
-`/json` Returns hostname, temperature and humidity as json as a single line.  
+`http://<hostname>/json` Returns hostname, temperature and humidity as json as a single line.  
     ```
     {
         "hostname":"Wohnzimmer",
