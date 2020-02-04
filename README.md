@@ -1,6 +1,6 @@
 # NodeMCU Temperature Sensor with DHT22
 
-![Screenshot](img/smartphone_screenshot.jpg)
+![Screenshot](img/smartphone_screenshot.jpg | width=300px)
 
 ## Install Arduino IDE and Libraries
 
