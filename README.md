@@ -1,16 +1,34 @@
 # NodeMCU Temperature Sensor with DHT22
 
-![Screenshot](img/smartphone_screenshot_small.jpg)
+![Screenshot](img/smartphone_screenshot_small.jpg)  
+Creates a simple asynchronous webserver on a NodeMCU to show up temperature an humidity. As sensor DHT22 is used.
+
+### Api
+`/` Returns the file *./WebServer/data/index.html*, replacing placeholder for temperature and humidity.
+
+`/temp` Returns the temperature in °C as a string, e.g. `20.1`.
+
+`/humidity` Returns the humidity in percent as a string, e.g. `50.3`.
+
+`/json` Returns hostname, temperature and humidity as json as a single line.  
+    ```
+    {
+        "hostname":"Wohnzimmer",
+        "temperature":22.5,
+        "humidity":40.2
+    }
+    ```
 
 ## Install Arduino IDE and Libraries
 
-1. Upload Extension
-2. DHT Sensor Libraries + Adafruit
-3. Wifi library
-4. AsyncWebserver
-5. TCP Lib
-6. SPIFFS
-7. ArduinoJson
+1. [Install SPIFFS](https://randomnerdtutorials.com/install-esp8266-filesystem-uploader-arduino-ide/)
+2. Adafruit ESP8266 by Adafruit
+3. [DHT Sensor Libraries by Adafruit](https://github.com/adafruit/DHT-sensor-library)
+4. [ESPAsyncWebServer](https://github.com/me-no-dev/ESPAsyncWebServer)*
+5. [ESPAsyncTCP](https://github.com/me-no-dev/ESPAsyncTCP)* 
+6. [ArduinoJson by bblanchon](https://github.com/bblanchon/ArduinoJson)
+
+*Download the last release zip and install manually.
 
 ## Used libs
 
