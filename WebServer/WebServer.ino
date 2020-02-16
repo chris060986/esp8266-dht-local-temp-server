@@ -6,7 +6,7 @@
 #include <Adafruit_Sensor.h>
 
 #define DHTTYPE   DHT22
-#define DHTPIN    2
+#define DHTPIN    12
 
 #define WLAN_SSID     "WLAN_SSID"
 #define WLAN_PASSWORD "WIFI_SECURE_KEY"
@@ -91,7 +91,8 @@ void setup() {
     
     Serial.println();
     Serial.println("WiFi connected");
-    Serial.print("IP address: "); Serial.println(WiFi.localIP());   
+    Serial.print("IP address: "); 
+    Serial.println(WiFi.localIP());   
 
     do{
       temperature = dht.readTemperature();
